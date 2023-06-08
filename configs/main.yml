@@ -1,0 +1,16 @@
+db_file: "bot.db"
+
+telegram_bot_url: "https://t.me/pocket_ui_bot"
+
+messages:
+  responses:
+    start: "Hello! To save links in your Pocket account, fisrt of all you need to add access. Follow the link bellow:\n%s"
+    already_auth: "You are already authorized, Put the link, I'm ready to save it."
+    saved_successfuly: "The link is successfully saved"
+    invalid_command: "Invalid command"
+  errors:
+    default: "Some went wrong."
+    invalid_link: "This link is not valid."
+    unauth: "You are not authorized."
+    unable_to_save: "Unfortunately, I didn't save the link, you can't try it again."
+
