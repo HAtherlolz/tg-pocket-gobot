@@ -1,18 +1,23 @@
-FROM golang:1.15-alpine3.12 AS builder
+# Start from a base image with Go installed
+FROM golang:latest
 
-COPY . /github.com/HAtherlolz/tg-pocket-gobot/
-WORKDIR /github.com/HAtherlolz/tg-pocket-gobot/
+# Set the working directory inside the container
+WORKDIR /app
 
+# Copy the Go module files
+COPY go.mod go.sum ./
+
+# Download and cache the Go module dependencies
 RUN go mod download
-RUN go build -o ./bin/ cmd/bot/main.go
 
-FROM alpine:latest
+# Copy the source code to the container
+COPY . .
 
-WORKDIR /root/
+# Build the Go application
+RUN go build -o app cmd/bot/main.go
 
-COPY --from=0 /github.com/HAtherlolz/tg-pocket-gobot/bin/bot .
-COPY --from=0 /github.com/HAtherlolz/tg-pocket-gobot/configs configs/
+# Expose the port that the application listens on
+EXPOSE 8080
 
-EXPOSE 8000
-
-CMD ["./bot"]
+# Set the entry point for the container
+CMD ["./app"]

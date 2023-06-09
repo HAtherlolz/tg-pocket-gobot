@@ -8,7 +8,8 @@ run: build
 	./.bin/bot
 
 build-image:
-	docker build -t tg_bot_golang:v0.1 .
+	sudo docker build -t tg_bot_golang:v0.1 .
 
 start-container:
-	docker run --name tg_bot_golang -p 8000:8000 --env-file .env tg_bot_golang:v0.1
+	sudo docker run --env-file .env -p 8080:8080 tg_bot_golang:v0.1
+	
